@@ -931,7 +931,8 @@
 (defn update-audio [{:keys [gameid sfx sfx-current-id] :as cursor} owner]
   ;; When it's the first game played with this state or when the sound history comes from different game, we skip the cacophony
   (let [sfx-last-played (om/get-state owner :sfx-last-played)]
-    (when (and (not (nil? sfx-last-played))
+    (when (and (get-in @app-state [:options :enablesounds])
+               (not (nil? sfx-last-played))
                (= gameid (:gameid sfx-last-played)))
       ;; Skip the SFX from queue with id smaller than the one last played, queue the rest
       (let [sfx-to-play (reduce (fn [sfx-list {:keys [id name]}]
@@ -994,7 +995,7 @@
          (let [me       (assoc ((if (= side :runner) :runner :corp) cursor) :active (and (pos? turn) (= (keyword active-player) side)))
                opponent (assoc ((if (= side :runner) :corp :runner) cursor) :active (and (pos? turn) (not= (keyword active-player) side)))]
            [:div.gameboard
-            [:div.gameboard-bg {:class (:background (:user @app-state))}]
+            [:div.gameboard-bg {:class (:background (:options @app-state))}]
             [:div.mainpane
              (om/build zones {:player opponent :remotes (get-remotes (get-in cursor [:corp :servers]))})
              [:div.centralpane
