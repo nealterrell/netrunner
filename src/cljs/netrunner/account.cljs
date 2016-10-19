@@ -26,7 +26,6 @@
   (.setItem js/localStorage "enablesounds" (om/get-state owner :enablesounds))
 
   (let [params (:options @app-state)]
-    (prn params)
     (go (let [response (<! (POST url params :json))]
           (if (= (:status response) 200)
             (om/set-state! owner :flash-message "Profile updated!")
@@ -111,8 +110,7 @@
                                              :value version
                                              :on-change #(do (om/set-state! owner :alt-card-version (.. % -target -value))
                                                              (swap! app-state update-in [:options :alt-arts]
-                                                                    assoc (keyword (om/get-state owner :alt-card)) (.. % -target -value))
-                                                             (prn (get-in @app-state [:options :alt-arts])))
+                                                                    assoc (keyword (om/get-state owner :alt-card)) (.. % -target -value)))
                                              :checked (= (om/get-state owner :alt-card-version) version)}]
                              (alt-art-name version)]]]
                      [:div
