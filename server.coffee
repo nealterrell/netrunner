@@ -334,7 +334,7 @@ passport.use new LocalStrategy (username, password, done) ->
       return done(null, false) if not valid
       if not user.options then user.options = {}
       done(null, {username: user.username, emailhash: user.emailhash, _id: user._id,\
-        isadmin: user.isadmin, options: {enablesounds: user.options.enablesounds, background: user.options.background }})
+        isadmin: user.isadmin, options: user.options})
 
 passport.serializeUser (user, done) ->
   done(null, user._id) if user
@@ -490,10 +490,10 @@ app.post '/reset/:token', (req, res) ->
 app.post '/update-profile', (req, res) ->
   if req.user
     db.collection('users').update {username: req.user.username}, {$set: {options: {background: req.body.background,\
-      enablesounds: req.body.enablesounds, 'alt-arts': req.body['alt-arts']}}}, \
+      'alt-arts': req.body['alt-arts'], 'opponent-alt-art': req.body['opponent-alt-art']}}}, \
       (err) ->
         console.log(err) if err
-        res.send {message: 'OK', background: req.body.background, enablesounds: req.body.enablesounds, altarts: req.body['alt-arts']}, 200
+        res.send {message: 'OK', background: req.body.background, altarts: req.body['alt-arts']}, 200
   else
     res.send {message: 'Unauthorized'}, 401
 

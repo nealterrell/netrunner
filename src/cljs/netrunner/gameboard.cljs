@@ -15,9 +15,11 @@
 (defonce lock (atom false))
 
 (defn image-url
-  [card player]
-  (prn (get-in @game-state [player :user :options :alt-arts]))
-  (let [version (get-in @game-state [player :user :options :alt-arts (keyword (:code card))] "default")]
+  [{:keys [side code] :as card} player]
+  (let [version (if (and (not= (:side @game-state) (keyword (lower-case side)))
+                         (not (get-in @app-state [:options :opponent-alt-art])))
+                  "default"
+                  (get-in @game-state [player :user :options :alt-arts (keyword (:code card))] "default"))]
     (str "/img/cards/" (:code card) (when-not (= version "default") (str "-" version)) ".png")))
 
 (defn toastr-options
