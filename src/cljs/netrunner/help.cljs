@@ -148,8 +148,9 @@
                              "Some examples would be: learning the game, learning the site's interface, testing a completely new and crazy deck idea, "
                              "testing future spoilers, playing on a touchscreen, playing at work and likely to have to quit on short notice, etc. "
                              "All of these circumstances may cause needless frustration of players expecting to play a game in a competitive setting."])}
-
-            )}
+            {:id "sounds"
+             :title "How do I turn off the sounds?"
+             :content [:p "You can disable sounds, in addition to changing other options, in the My Account tab in the top navigation row."]})}
     {:id "cards"
      :title "Cards and Specific Interactions"
      :sub (list
