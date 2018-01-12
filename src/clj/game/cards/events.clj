@@ -534,7 +534,8 @@
                                               (if (> n 0)
                                                 (continue-ability state side
                                                   {:prompt "Reveal how many copies of Fear the Masses?"
-                                                   :choices {:number (req n)}
+                                                   :choices {:number (req n)
+                                                             :default (req n)}
                                                    :effect (req (when (> target 0)
                                                                   (mill state :corp target)
                                                                   (system-msg state side
