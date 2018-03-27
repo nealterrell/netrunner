@@ -45,3 +45,18 @@
 (defn animal-username [{:keys [username] :as user}]
   (let [team (animal-team user)]
     (str "[" (team-name team) "] " username)))
+
+(defonce animal-scores (atom (zipmap
+                              (keys animal-teams)
+                              (replicate (count animal-teams) 0))))
+
+(defn increment-score
+  "Takes a team name as a symbol, and increments that team's score by 1."
+  [team]
+  (swap! animal-scores
+         (fn [score-dict] (assoc score-dict team (inc (score-dict team))))))
+
+(defn get-score
+  "Takes a team name as a symbol, and returns that team's score."
+  [team]
+  (@animal-scores team))
