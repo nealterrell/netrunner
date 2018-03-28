@@ -7,23 +7,24 @@
                               :cards #{"BlacKat" "Rumor Mill"}
                               :nickname "kitty meow"}
                    :snake    {:name  "Team Snake"
-                              :cards #{"Susanoo-no-Mikoto" "Cobra" "Viper" "Mamba" "Caduceus"}
+                              :cards #{"Susanoo-no-Mikoto" "Cobra" "Viper" "Mamba" "Caduceus" "Puffer"}
                               :nickname "snek"}
                    :lizard   {:name  "Team Lizard"
-                              :cards #{"Financial Collapse" "Shattered Remains"}}
+                              :cards #{"Financial Collapse" "Shattered Remains" "Maw" "Exploratory Romp"}}
                    :turtle   {:name  "Team Turtle"
                               :cards #{"Aumakua" "Turtlebacks" "Shell Corporation" "Bullfrog"}}
                    :ungulate {:name  "Ungulate"
                               :cards #{"Celebrity Gift" "Trojan Horse" "Patron" "Green Level Clearance" "Improved Tracers"
-                                       "Taurus"}
+                                       "Taurus" "On the Lam" "Battering Ram" "Wari"}
                               :nickname "whinnie"}
                    :bee      {:name  "Bee"
-                              :cards #{"Plan B" "Honeyfarm" "Chrysalis" "Hive" "Hivemind" "Swarm" "Mutate" "Interrupt 0" "Special Report"}
+                              :cards #{"Plan B" "Honeyfarm" "Chrysalis" "Hive" "Hivemind" "Swarm" "Mutate" "Interrupt 0" "Special Report"
+                                       "Bug"}
                               :nickname "buzz buzz"}
                    :bird     {:name  "Bird"
                               :cards #{"Owl" "Firmware Updates"}}
                    :whale    {:name  "Whale"
-                              :cards #{"Howler" "Darwin" "Swordsman"}}})
+                              :cards #{"Howler" "Darwin" "Swordsman" "Leviathan"}}})
 
 (defn team-cards [team]
   (get-in animal-teams [team :cards]))
