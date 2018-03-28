@@ -1,28 +1,29 @@
 (ns jinteki.fools)
 
 (def animal-teams {:dog      {:name  "Team Dog"
-                              :cards #{}
+                              :cards #{"Lycan"}
                               :nickname "bow-wow"}
                    :cat      {:name  "Cat"
-                              :cards #{""}
+                              :cards #{"BlacKat" "Rumor Mill"}
                               :nickname "kitty meow"}
                    :snake    {:name  "Team Snake"
                               :cards #{"Susanoo-no-Mikoto" "Cobra" "Viper" "Mamba" "Caduceus"}
                               :nickname "snek"}
                    :lizard   {:name  "Team Lizard"
-                              :cards #{}}
+                              :cards #{"Financial Collapse" "Shattered Remains"}}
                    :turtle   {:name  "Team Turtle"
-                              :cards #{"Aumakua" "Turtlebacks" "Shell Corporation"}}
+                              :cards #{"Aumakua" "Turtlebacks" "Shell Corporation" "Bullfrog"}}
                    :ungulate {:name  "Ungulate"
-                              :cards #{"Celebrity Gift" "Grim" "Trojan Horse" "Patron"}
+                              :cards #{"Celebrity Gift" "Trojan Horse" "Patron" "Green Level Clearance" "Improved Tracers"
+                                       "Taurus"}
                               :nickname "whinnie"}
                    :bee      {:name  "Bee"
-                              :cards #{"Plan B" "Honeyfarm" "Chrysalis" "Hive" "Hivemind" "Swarm"}
+                              :cards #{"Plan B" "Honeyfarm" "Chrysalis" "Hive" "Hivemind" "Swarm" "Mutate" "Interrupt 0" "Special Report"}
                               :nickname "buzz buzz"}
                    :bird     {:name  "Bird"
-                              :cards #{}}
+                              :cards #{"Owl" "Firmware Updates"}}
                    :whale    {:name  "Whale"
-                              :cards #{}}})
+                              :cards #{"Howler" "Darwin" "Swordsman"}}})
 
 (defn team-cards [team]
   (get-in animal-teams [team :cards]))
