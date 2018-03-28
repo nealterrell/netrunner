@@ -28,7 +28,7 @@
                               :cards #{"Owl" "Firmware Updates" "Kongamato" "Golden" "Peregrine" "Saker" "Recon Drone" "Origami"
                                        "GS Shrike M2" "Data Raven" "Peacock" "Egret"}}
                    :whale    {:name  "Team Whale"
-                              :cards #{"Howler" "Darwin" "Swordsman" "Gbahali" "Red Herrings" "Spearfishing"}}})
+                              :cards #{"Howler" "Darwin" "Swordsman" "Gbahali" "Red Herrings" "Spearfishing" "Leviathan"}}})
 
 (defn team-cards [team]
   (get-in animal-teams [team :cards]))
