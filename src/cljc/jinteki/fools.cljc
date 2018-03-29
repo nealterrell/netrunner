@@ -13,12 +13,14 @@
                    :snake    {:name     "Team Snake"
                               :cards    #{"Susanoo-no-Mikoto" "Cobra" "Viper" "Mamba" "Caduceus" "Puffer" "Lamprey" "Wormhole" "Wraparound" "Tollbooth" "Uroboros" "Dracō" "Wyrm"}
                               :card-icon "🐍"
-                              :nickname "snek"}
+                              :nickname "snek"
+                              :sounds   {:play  #{"snake-play1"}}}
                    :lizard   {:name     "Team Lizard"
                               :cards    #{"Financial Collapse" "Shattered Remains" "Casting Call" "Chameleon" "Exploratory Romp" "Modded"
                                           "Maw" "Dinosaurus"}
                               :card-icon "🦎"
-                              :nickname "dinorawr"}
+                              :nickname "dinorawr"
+                              :sounds   {:play  #{"lizard-play1"}}}
                    :turtle   {:name     "Team Turtle"
                               :cards    #{"Aumakua" "Turtlebacks" "Shell Corporation" "Bullfrog"}
                               :card-icon "🐢"
