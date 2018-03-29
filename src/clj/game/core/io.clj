@@ -73,6 +73,12 @@
       (swap! state update-in [:sfx] #(take 3 (conj % {:id (inc current-id) :name sfx})))
       (swap! state update-in [:sfx-current-id] #(inc %)))))
 
+(defn play-fools-sound
+  "Play a random sound associated with the given card of the sound category type, if any."
+  [state {:keys [title] :as card} sound-type]
+  (when-let [options (get-in fools/animal-teams [(fools/card-team title) :sounds sound-type])]
+    (play-sfx state nil (first (shuffle options)))))
+
 ;;; "ToString"-like methods
 (defn card-str
   "Gets a string description of an installed card, reflecting whether it is rezzed,
