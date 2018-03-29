@@ -7,7 +7,7 @@
                               :card-icon "🐶"
                               :nickname "bow-wow"}
                    :cat      {:name     "Team Cat"
-                              :cards    #{"BlacKat" "Rumor Mill" "Marathon" "Hellion Alpha Test" "Hellion Beta Test" "Quantum Predictive Model"}
+                              :cards    #{"BlacKat" "Rumor Mill" "Marathon" "Hellion Alpha Test" "Hellion Beta Test" "Quantum Predictive Model" "Self-modifying Code"}
                               :card-icon "🐱"
                               :nickname "kitty meow"}
                    :snake    {:name     "Team Snake"
@@ -17,12 +17,12 @@
                               :sounds   {:play  #{"snake-play1"}}}
                    :lizard   {:name     "Team Lizard"
                               :cards    #{"Financial Collapse" "Shattered Remains" "Casting Call" "Chameleon" "Exploratory Romp" "Modded"
-                                          "Maw" "Dinosaurus"}
+                                          "Maw" "Dinosaurus" "Gbahali"}
                               :card-icon "🦎"
                               :nickname "dinorawr"
                               :sounds   {:play  #{"lizard-play1"}}}
                    :turtle   {:name     "Team Turtle"
-                              :cards    #{"Aumakua" "Turtlebacks" "Shell Corporation" "Bullfrog" "Maw"}
+                              :cards    #{"Aumakua" "Turtlebacks" "Shell Corporation" "Bullfrog"}
                               :card-icon "🐢"
                               :nickname "cowabunga"
                               :sounds   {:play #{"turtle-play1"}
@@ -39,7 +39,7 @@
                               :card-icon "🐝"
                               :nickname "buzz buzz"}
                    :bird     {:name     "Team Bird"
-                              :cards    #{"Owl" "Firmware Updates" "Kongamato" "Golden" "Peregrine" "Saker" "Recon Drone" "Origami" "GS Shrike M2" "Data Raven" "Peacock" "Egret" "Thoth" "Data Raven" "Hadrian's Wall"}
+                              :cards    #{"Owl" "Firmware Updates" "Kongamato" "Golden" "Peregrine" "Saker" "Recon Drone" "Origami" "GS Shrike M2" "Data Raven" "Peacock" "Egret" "Thoth" "Data Raven" "Hadrian's Wall" "Early Bird" "Paricia" "The Gauntlet"}
                               :card-icon "🐦"
                               :nickname "birdo"}
                    :whale    {:name     "Team Whale"
