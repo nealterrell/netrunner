@@ -77,7 +77,7 @@
   "Creates a break subroutine ability.
   If n = 0 then any number of subs are broken."
   ([cost n] (break-sub cost n nil))
-  ([cost n subtype] (break-sub cost n subtype nil))
+  ([cost n subtype] (break-sub cost n subtype (req (play-fools-sound state card :use))))
   ([cost n subtype effect]
    {:msg (str "break "
               (when (> n 1) "up to ")
@@ -821,6 +821,7 @@
                                   :req (req (and (rezzed? current-ice) (has-subtype? current-ice "Barrier")))
                                   :msg (msg "derez " (:title current-ice) " and return Saker to their Grip")
                                   :effect (effect (derez current-ice)
+                                                  (play-fools-sound state card "trash")
                                                   (move card :hand))}]})
 
    "Savant"
