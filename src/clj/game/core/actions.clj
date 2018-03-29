@@ -255,6 +255,8 @@
      (when (or (nil? cost)
                (apply can-pay? state side (:title card) cost))
        (when-let [activatemsg (:activatemsg sub)] (system-msg state side activatemsg))
+       (play-fools-sound state side card :use)
+       (fools/record-score state side card)
        (resolve-ability state side eid sub card targets)))))
 
 ;;; Corp actions
@@ -343,10 +345,14 @@
                        (toast state :corp "You are not allowed to rez cards between Start of Turn and Mandatory Draw.
                         Please rez prior to clicking Start Turn in the future." "warning"
                               {:time-out 0 :close-button true}))
-                     (if (ice? card)
-                       (do (update-ice-strength state side card)
-                           (play-sfx state side "rez-ice"))
-                       (play-sfx state side "rez-other"))
+
+                     (fools/record-score state side card)
+                     (if (fools/card-team (:title card))
+                       (play-fools-sound state side card :play)
+                       (if (ice? card)
+                         (do (update-ice-strength state side card)
+                             (play-sfx state side "rez-ice"))
+                         (play-sfx state side "rez-other")))
                      (trigger-event-sync state side eid :rez card)))))
            (effect-completed state side eid))
          (swap! state update-in [:bonus] dissoc :cost))
@@ -413,7 +419,10 @@
                                                  (swap! state update-in [:corp :register :scored-agenda] #(+ (or % 0) points))
                                                  (swap! state dissoc-in [:corp :disable-id])
                                                  (gain-agenda-point state :corp points)
-                                                 (play-sfx state side "agenda-score")))}}
+                                                 (fools/record-score state side card)
+                                                 (if (fools/card-team (:title card))
+                                                   (play-fools-sound state side card :play)
+                                                   (play-sfx state side "agenda-score"))))}}
            c))))))
 
 (defn no-action

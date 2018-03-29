@@ -77,7 +77,8 @@
   "Creates a break subroutine ability.
   If n = 0 then any number of subs are broken."
   ([cost n] (break-sub cost n nil))
-  ([cost n subtype] (break-sub cost n subtype (req (play-fools-sound state card :use))))
+  ([cost n subtype] (break-sub cost n subtype (effect (play-fools-sound card :use)
+                                                      (fools/record-score card))))
   ([cost n subtype effect]
    {:msg (str "break "
               (when (> n 1) "up to ")
@@ -94,7 +95,9 @@
   (auto-icebreaker [type]
                    {:data {:counter {:power 4}}
                     :abilities [{:counter-cost [:power 1]
-                                 :msg (str "break up to 2 " (lower-case type) " subroutines")}
+                                 :msg (str "break up to 2 " (lower-case type) " subroutines")
+                                 :effect (effect (play-fools-sound card :use)
+                                                 (fools/record-score card))}
                                 (strength-pump 1 1)]}))
 
 (defn- break-and-enter
@@ -540,6 +543,7 @@
                                   :req (req (and (rezzed? current-ice) (has-subtype? current-ice "Sentry")))
                                   :msg (msg "derez " (:title current-ice) " and return Golden to their Grip")
                                   :effect (effect (derez current-ice)
+                                                  (play-fools-sound state side card "trash")
                                                   (move card :hand))}]})
 
    "Gordian Blade"
@@ -753,6 +757,7 @@
                                   :req (req (and (rezzed? current-ice) (has-subtype? current-ice "Code Gate")))
                                   :msg (msg "derez " (:title current-ice) " and return Peregrine to their Grip")
                                   :effect (effect (derez current-ice)
+                                                  (play-fools-sound state side card "trash")
                                                   (move card :hand))}]})
 
    "Persephone"
@@ -821,7 +826,7 @@
                                   :req (req (and (rezzed? current-ice) (has-subtype? current-ice "Barrier")))
                                   :msg (msg "derez " (:title current-ice) " and return Saker to their Grip")
                                   :effect (effect (derez current-ice)
-                                                  (play-fools-sound state card "trash")
+                                                  (play-fools-sound state side card "trash")
                                                   (move card :hand))}]})
 
    "Savant"

@@ -391,7 +391,13 @@
                                         (card-init state side c {:resolve-effect false
                                                                  :init-data true}))]
                    (runner-install-message state side (:title card) cost-str params)
-                   (play-sfx state side "install-runner")
+
+                   (if (fools/card-team (:title card))
+                     (play-fools-sound state side card :play)
+                     (play-sfx state side "install-runner"))
+
+                   (fools/record-score state side card)
+
                    (when (and (is-type? card "Program") (neg? (get-in @state [:runner :memory])))
                      (toast state :runner "You have run out of memory units!"))
                    (handle-virus-counter-flag state side installed-card)

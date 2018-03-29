@@ -7,7 +7,8 @@
                               :card-icon "🐶"
                               :nickname  "bow-wow"}
                    :cat      {:name      "Team Cat"
-                              :cards     #{"BlacKat" "Rumor Mill" "Marathon" "Hellion Alpha Test" "Hellion Beta Test" "Quantum Predictive Model"}
+                              :cards     #{"BlacKat" "Rumor Mill" "Marathon" "Hellion Alpha Test" "Hellion Beta Test" "Quantum Predictive Model"
+                                           "Chimera" "Quandary" "Conundrum"}
                               :card-icon "🐱"
                               :nickname "kitty meow"}
                    :snake    {:name     "Team Snake"
@@ -22,14 +23,15 @@
                               :nickname "dinorawr"
                               :sounds   {:play  #{"lizard-play1"}}}
                    :turtle   {:name     "Team Turtle"
-                              :cards    #{"Aumakua" "Turtlebacks" "Shell Corporation" "Bullfrog"}
+                              :cards    #{"Aumakua" "Turtlebacks" "Shell Corporation" "Bullfrog" "Gbahali"}
                               :card-icon "🐢"
                               :nickname  "cowabunga"
                               :sounds    {:play #{"turtle-play1"}
-                                          :use  #{"turtle-use1"}}}
+                                          :use  #{"turtle-use1"}
+                                          :trash #{"turtle-trash"}}}
                    :ungulate {:name      "Team Ungulate"
                               :cards     #{"Celebrity Gift" "Trojan Horse" "Patron" "Green Level Clearance" "Improved Tracers"
-                                           "Taurus" "On the Lam" "Battering Ram" "Wari"}
+                                           "Taurus" "On the Lam" "Battering Ram" "Wari" "Knight"}
                               :card-icon "🐮"
                               :nickname  "whinnie"
                               :sounds    {}}
@@ -84,16 +86,28 @@
     (str "[" (team-name team) "] " username)))
 
 (defonce animal-scores (atom (zipmap
-                              (keys animal-teams)
-                              (replicate (count animal-teams) 0))))
+                               (keys animal-teams)
+                               (replicate (count animal-teams) 0))))
 
-(defn increment-score
+(defonce user-scores (atom {}))
+
+(defn increment-animal-score
   "Takes a team name as a symbol, and increments that team's score by 1."
   [team]
-  (swap! animal-scores
-         (fn [score-dict] (assoc score-dict team (inc (score-dict team))))))
+  (swap! animal-scores update-in [team] inc))
+
+(defn increment-user-score [team {:keys [username] :as user}]
+  (swap! user-scores update-in [team username] (fnil inc 0)))
 
 (defn get-score
   "Takes a team name as a symbol, and returns that team's score."
   [team]
   (@animal-scores team))
+
+(defn record-score [state side card]
+  (let [{:keys [username] :as user} (get-in @state [side :user])
+        user-animal (animal-team user)
+        card-animal (card-team (:title card))]
+    (when (= user-animal card-animal)
+      (increment-animal-score user-animal)
+      (increment-user-score user-animal user))))
