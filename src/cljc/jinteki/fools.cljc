@@ -1,33 +1,43 @@
 (ns jinteki.fools)
 
-(def animal-teams {:dog      {:name  "Team Dog"
-                              :cards #{"Lycan" "Synth DNA Modification" "Rover Algorithm" "Watchdog" "Lab Dog"
-                                       "Cerberus \"Lady\" H1" "Cerberus \"Rex\" H2" "Ceberus \"CUJ.0\" H3"
-                                       "Pup" "Komainu" "News Hound" "Emergency Shutdown" "HQ Interface"}
+(def animal-teams {:dog      {:name     "Team Dog"
+                              :cards    #{"Lycan" "Synth DNA Modification" "Rover Algorithm" "Watchdog" "Lab Dog"
+                                          "Cerberus \"Lady\" H1" "Cerberus \"Rex\" H2" "Ceberus \"CUJ.0\" H3"
+                                          "Pup" "Komainu" "News Hound" "Emergency Shutdown" "HQ Interface"}
                               :nickname "bow-wow"}
-                   :cat      {:name  "Team Cat"
-                              :cards #{"BlacKat" "Rumor Mill" "Marathon" "Hellion Beta Test" "Quantum Predictive Model"}
+                   :cat      {:name     "Team Cat"
+                              :cards    #{"BlacKat" "Rumor Mill" "Marathon" "Hellion Beta Test" "Quantum Predictive Model"}
                               :nickname "kitty meow"}
-                   :snake    {:name  "Team Snake"
-                              :cards #{"Susanoo-no-Mikoto" "Cobra" "Viper" "Mamba" "Caduceus" "Puffer" "Lamprey" "Wormhole"}
+                   :snake    {:name     "Team Snake"
+                              :cards    #{"Susanoo-no-Mikoto" "Cobra" "Viper" "Mamba" "Caduceus" "Puffer" "Lamprey" "Wormhole"}
                               :nickname "snek"}
-                   :lizard   {:name  "Team Lizard"
-                              :cards #{"Financial Collapse" "Shattered Remains" "Casting Call" "Chameleon" "Exploratory Romp" "Modded"
-                    :turtle   {:name  "Team Turtle"
-                              :cards #{"Aumakua" "Turtlebacks" "Shell Corporation" "Bullfrog"}}
-                   :ungulate {:name  "Team Ungulate"
-                              :cards #{"Celebrity Gift" "Trojan Horse" "Patron" "Green Level Clearance" "Improved Tracers"
-                                       "Taurus" "On the Lam" "Battering Ram" "Wari"}
-                              :nickname "whinnie"}
-                   :bee      {:name  "Team Bee"
-                              :cards #{"Plan B" "Honeyfarm" "Chrysalis" "Hive" "Hivemind" "Swarm" "Mutate" "Interrupt 0" "Special Report"
-                                       "Bug"}
+                   :lizard   {:name     "Team Lizard"
+                              :cards    #{"Financial Collapse" "Shattered Remains" "Casting Call" "Chameleon" "Exploratory Romp" "Modded"
+                                          "Maw"}
+                              :nickname "dinorawr"}
+                   :turtle   {:name     "Team Turtle"
+                              :cards    #{"Aumakua" "Turtlebacks" "Shell Corporation" "Bullfrog"}
+                              :nickname "cowabunga"
+                              :sounds   {:play #{"turtle-play1"}
+                                         :use  #{"turtle-use1"}}}
+                   :ungulate {:name     "Team Ungulate"
+                              :cards    #{"Celebrity Gift" "Trojan Horse" "Patron" "Green Level Clearance" "Improved Tracers"
+                                          "Taurus" "On the Lam" "Battering Ram" "Wari"}
+                              :nickname "whinnie"
+                              :sounds   {}}
+                   :bee      {:name     "Team Bee"
+                              :cards    #{"Plan B" "Honeyfarm" "Chrysalis" "Hive" "Hivemind" "Swarm" "Mutate" "Interrupt 0" "Special Report"
+                                          "Bug"}
                               :nickname "buzz buzz"}
-                   :bird     {:name  "Team Bird"
-                              :cards #{"Owl" "Firmware Updates" "Kongamato" "Golden" "Peregrine" "Saker" "Recon Drone" "Origami"
-                                       "GS Shrike M2" "Data Raven" "Peacock" "Egret"}}
-                   :whale    {:name  "Team Whale"
-                              :cards #{"Howler" "Darwin" "Swordsman" "Gbahali" "Red Herrings" "Spearfishing" "Leviathan"}}})
+                   :bird     {:name     "Team Bird"
+                              :cards    #{"Owl" "Firmware Updates" "Kongamato" "Golden" "Peregrine" "Saker" "Recon Drone" "Origami"
+                                          "GS Shrike M2" "Data Raven" "Peacock" "Egret"}
+                              :nickname "birdo"}
+                   :whale    {:name     "Team Whale"
+                              :cards    #{"Howler" "Darwin" "Swordsman" "Gbahali" "Red Herrings" "Spearfishing" "Leviathan"}
+                              :nickname ""
+                              :sounds   {:trash #{"whale-trash"}
+                                         :play  #{"whale-play1" "whale-play2"}}}})
 
 (defn team-cards [team]
   (get-in animal-teams [team :cards]))
@@ -37,6 +47,11 @@
 
 (defn team-name [team]
   (get-in animal-teams [team :name]))
+
+(defn card-team [card-title]
+  (some #(when (contains? (:cards (second %)) card-title)
+           (first %))
+        animal-teams))
 
 (defn parse-name [s]
   #?(:clj (reduce + (map int s))
