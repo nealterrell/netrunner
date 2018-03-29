@@ -1,26 +1,28 @@
 (ns jinteki.fools)
 
-(def animal-teams {:dog      {:name      "Team Dog"
-                              :cards     #{"Lycan" "Synth DNA Modification" "Rover Algorithm" "Watchdog" "Lab Dog"
-                                           "Cerberus \"Lady\" H1" "Cerberus \"Rex\" H2" "Cerberus \"Cuj.0\" H3"
-                                           "Pup" "Komainu" "News Hound" "Emergency Shutdown" "HQ Interface"}
+(def animal-teams {:dog      {:name     "Team Dog"
+                              :cards    #{"Lycan" "Synth DNA Modification" "Rover Algorithm" "Watchdog" "Lab Dog"
+                                          "Cerberus \"Lady\" H1" "Cerberus \"Rex\" H2" "Cerberus \"Cuj.0\" H3"
+                                          "Pup" "Komainu" "News Hound" "Emergency Shutdown" "HQ Interface" "Data Hound"}
                               :card-icon "🐶"
                               :nickname  "bow-wow"}
                    :cat      {:name      "Team Cat"
                               :cards     #{"BlacKat" "Rumor Mill" "Marathon" "Hellion Alpha Test" "Hellion Beta Test" "Quantum Predictive Model"}
                               :card-icon "🐱"
-                              :nickname  "kitty meow"}
-                   :snake    {:name      "Team Snake"
-                              :cards     #{"Susanoo-no-Mikoto" "Cobra" "Viper" "Mamba" "Caduceus" "Puffer" "Lamprey" "Wormhole"}
+                              :nickname "kitty meow"}
+                   :snake    {:name     "Team Snake"
+                              :cards    #{"Susanoo-no-Mikoto" "Cobra" "Viper" "Mamba" "Caduceus" "Puffer" "Lamprey" "Wormhole" "Wraparound" "Tollbooth" "Uroboros" "Dracō" "Wyrm"}
                               :card-icon "🐍"
-                              :nickname  "snek"}
-                   :lizard   {:name      "Team Lizard"
-                              :cards     #{"Financial Collapse" "Shattered Remains" "Casting Call" "Chameleon" "Exploratory Romp" "Modded"
-                                           "Maw"}
+                              :nickname "snek"
+                              :sounds   {:play  #{"snake-play1"}}}
+                   :lizard   {:name     "Team Lizard"
+                              :cards    #{"Financial Collapse" "Shattered Remains" "Casting Call" "Chameleon" "Exploratory Romp" "Modded"
+                                          "Maw" "Dinosaurus"}
                               :card-icon "🦎"
-                              :nickname  "dinorawr"}
-                   :turtle   {:name      "Team Turtle"
-                              :cards     #{"Aumakua" "Turtlebacks" "Shell Corporation" "Bullfrog" "Bulwark" "Gbahali"}
+                              :nickname "dinorawr"
+                              :sounds   {:play  #{"lizard-play1"}}}
+                   :turtle   {:name     "Team Turtle"
+                              :cards    #{"Aumakua" "Turtlebacks" "Shell Corporation" "Bullfrog"}
                               :card-icon "🐢"
                               :nickname  "cowabunga"
                               :sounds    {:play #{"turtle-play1"}
