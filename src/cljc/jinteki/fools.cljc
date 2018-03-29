@@ -2,12 +2,12 @@
 
 (def animal-teams {:dog      {:name     "Team Dog"
                               :cards    #{"Lycan" "Synth DNA Modification" "Rover Algorithm" "Watchdog" "Lab Dog"
-                                          "Cerberus \"Lady\" H1" "Cerberus \"Rex\" H2" "Ceberus \"CUJ.0\" H3"
+                                          "Cerberus \"Lady\" H1" "Cerberus \"Rex\" H2" "Cerberus \"Cuj.0\" H3"
                                           "Pup" "Komainu" "News Hound" "Emergency Shutdown" "HQ Interface"}
                               :card-icon "🐶"
                               :nickname "bow-wow"}
                    :cat      {:name     "Team Cat"
-                              :cards    #{"BlacKat" "Rumor Mill" "Marathon" "Hellion Beta Test" "Quantum Predictive Model"}
+                              :cards    #{"BlacKat" "Rumor Mill" "Marathon" "Hellion Alpha Test" "Hellion Beta Test" "Quantum Predictive Model"}
                               :card-icon "🐱"
                               :nickname "kitty meow"}
                    :snake    {:name     "Team Snake"
@@ -42,7 +42,7 @@
                               :card-icon "🐦"
                               :nickname "birdo"}
                    :whale    {:name     "Team Whale"
-                              :cards    #{"Howler" "Darwin" "Swordsman" "Gbahali" "Red Herrings" "Spearfishing" "Leviathan"}
+                              :cards    #{"Howler" "Darwin" "Swordsman" "Gbahali" "Red Herrings" "Spear Phishing" "Leviathan"}
                               :card-icon "🐳"
                               :nickname ""
                               :sounds   {:trash #{"whale-trash"}
@@ -56,6 +56,9 @@
 
 (defn team-name [team]
   (get-in animal-teams [team :name]))
+
+(defn team-card-icon [team]
+  (get-in animal-teams [team :card-icon]))
 
 (defn card-team [card-title]
   (some #(when (contains? (:cards (second %)) card-title)

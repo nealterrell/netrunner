@@ -402,7 +402,10 @@
             banned-span
             [:span
              (when restricted restricted-span)
-             (when rotated rotated-span)]))))
+             (when rotated rotated-span)])
+
+          (when-let [team (fools/card-team (:title card))]
+            [:span {:title (fools/team-name team)} " " (str (fools/team-card-icon team) zws)]))))
 
 (defn deck-influence-html
   "Returns hiccup-ready vector with dots colored appropriately to deck's influence."
