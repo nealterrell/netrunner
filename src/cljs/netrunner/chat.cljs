@@ -8,7 +8,8 @@
             [netrunner.auth :refer [avatar authenticated] :as auth]
             [netrunner.gameboard :refer [card-preview-mouse-over card-preview-mouse-out get-message-parts create-span card-zoom] :as gameboard]
             [netrunner.ajax :refer [GET PUT]]
-            [netrunner.ws :as ws]))
+            [netrunner.ws :as ws]
+            [jinteki.fools :as fools]))
 
 (declare fetch-messages)
 
@@ -107,13 +108,13 @@
         (let [user (:user @app-state)
               my-msg (= (:username message) (:username user))]
           [:div.message
-           (om/build avatar message {:opts {:size 38}})
+           (om/build avatar message {:opts {:size 48}})
            [:div.content
             [:div.name-menu
              [:span.username
               {:on-click #(-> (om/get-node owner "user-msg-buttons") js/$ .toggle)
                :class (if my-msg "" "clickable")}
-              (:username message)]
+              (fools/animal-username message)]
              (when user
                (when (not my-msg)
                  [:div.panel.blue-shade.block-menu
