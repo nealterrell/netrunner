@@ -34,17 +34,22 @@
          [:h2 "Leaderboards"]
          [:h3 "Teams"]
          (let [team-stats (om/get-state owner :team-stats)
-               maxscore (->> team-stats
-                          (sort-by second)
-                          reverse
-                          first
-                          second
-                          inc)]
+               maxscore (max 1
+                             (->> team-stats
+                               (sort-by second)
+                               reverse
+                               first
+                               second
+                               inc))]
            (for [[team data] (sort-by #(:name (second %)) fools/animal-teams)]
-             (let [score (get team-stats team)]
-               (list [:div (:name data)]
-                     [:div.bar {:style {:width (str (+ 10 (* 100 (/ score maxscore))) "%")}}
-                      score]))))
+             (let [score (get team-stats team 0)
+                   shortname (last (s/split (:name data) #" "))]
+               (list [:div.teamname (:name data)]
+                     [:div.bar
+                      {:class shortname
+                       :style
+                       {:width (str (+ 10 (* 100 (/ score maxscore))) "%")}}
+                      [:span.score score]]))))
 
          [:h3 "Pack Leaders"]
          (let [leaders (om/get-state owner :team-leaders)]
