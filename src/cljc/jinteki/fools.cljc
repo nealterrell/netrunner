@@ -22,7 +22,7 @@
                               :nickname "dinorawr"
                               :sounds   {:play  #{"lizard-play1"}}}
                    :turtle   {:name     "Team Turtle"
-                              :cards    #{"Aumakua" "Turtlebacks" "Shell Corporation" "Bullfrog"}
+                              :cards    #{"Aumakua" "Turtlebacks" "Shell Corporation" "Bullfrog" "Surfer"}
                               :card-icon "🐢"
                               :nickname "cowabunga"
                               :sounds   {:play #{"turtle-play1"}
@@ -38,11 +38,11 @@
                               :card-icon "🐝"
                               :nickname "buzz buzz"}
                    :bird     {:name     "Team Bird"
-                              :cards    #{"Owl" "Firmware Updates" "Kongamato" "Golden" "Peregrine" "Saker" "Recon Drone" "Origami" "GS Shrike M2" "Data Raven" "Peacock" "Egret" "Thoth" "Data Raven" "Hadrian's Wall" "Early Bird" "Paricia" "The Gauntlet"}
+                              :cards    #{"Owl" "Firmware Updates" "Kongamato" "Golden" "Peregrine" "Saker" "Recon Drone" "Origami" "GS Shrike M2" "Data Raven" "Peacock" "Egret" "Thoth" "Data Raven" "Hadrian's Wall" "Early Bird" "Paricia" "The Gauntlet" "Khan" }
                               :card-icon "🐦"
                               :nickname "birdo"}
                    :whale    {:name     "Team Whale"
-                              :cards    #{"Howler" "Darwin" "Swordsman" "Gbahali" "Red Herrings" "Spear Phishing" "Leviathan" "Crescentus"}
+                              :cards    #{"Howler" "Darwin" "Swordsman" "Gbahali" "Red Herrings" "Spear Phishing" "Leviathan" "Crescentus" "Whirlpool" "Its a Trap!"}
                               :card-icon "🐳"
                               :nickname ""
                               :sounds   {:trash #{"whale-trash"}
