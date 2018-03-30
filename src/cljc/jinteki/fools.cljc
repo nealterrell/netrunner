@@ -7,7 +7,7 @@
                               :card-icon "🐶"
                               :nickname "bow-wow"}
                    :cat      {:name     "Team Cat"
-                              :cards    #{"BlacKat" "Rumor Mill" "Marathon" "Hellion Alpha Test" "Hellion Beta Test" "Quantum Predictive Model" "Self-modifying Code"}
+                              :cards    #{"BlacKat" "Rumor Mill" "Marathon" "Hellion Alpha Test" "Hellion Beta Test" "Quantum Predictive Model" "Self-modifying Code" "Inversificator"}
                               :card-icon "🐱"
                               :nickname "kitty meow"}
                    :snake    {:name     "Team Snake"
@@ -28,8 +28,7 @@
                               :sounds   {:play #{"turtle-play1"}
                                          :use  #{"turtle-use1"}}}
                    :ungulate {:name     "Team Ungulate"
-                              :cards    #{"Celebrity Gift" "Trojan Horse" "Patron" "Green Level Clearance" "Improved Tracers"
-                                          "Taurus" "On the Lam" "Battering Ram" "Wari"}
+                              :cards    #{"Celebrity Gift" "Trojan Horse" "Patron" "Green Level Clearance" "Improved Tracers" "Taurus" "On the Lam" "Battering Ram" "Wari" "Forger"}
                               :card-icon "🐮"
                               :nickname "whinnie"
                               :sounds   {}}
@@ -43,7 +42,7 @@
                               :card-icon "🐦"
                               :nickname "birdo"}
                    :whale    {:name     "Team Whale"
-                              :cards    #{"Howler" "Darwin" "Swordsman" "Gbahali" "Red Herrings" "Spear Phishing" "Leviathan"}
+                              :cards    #{"Howler" "Darwin" "Swordsman" "Gbahali" "Red Herrings" "Spear Phishing" "Leviathan" "Crescentus"}
                               :card-icon "🐳"
                               :nickname ""
                               :sounds   {:trash #{"whale-trash"}
