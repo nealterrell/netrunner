@@ -51,6 +51,7 @@
                          "netrunner.account"
                          "netrunner.stats"
                          "netrunner.news"
+                         "netrunner.leaderboard"
                          "dev.figwheel"]]
                 (str "goog.require(\"" req "\");"))])
        (list (hiccup/include-js (str "js/app.js?v=" version))
@@ -100,7 +101,10 @@
         [:div#stats]]
        [:div.item
         [:div.about-bg]
-        [:div#about]]]]
+        [:div#about]]
+       [:div.item
+        [:div.push-your-luck-bg]
+        [:div#leaderboard]]]]
     [:audio#ting
       [:source {:src "/sound/ting.mp3" :type "audio/mp3"}]
      [:source {:src "/sound/ting.ogg" :type "audio/ogg"}]]

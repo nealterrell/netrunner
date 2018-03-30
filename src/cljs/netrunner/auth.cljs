@@ -34,7 +34,11 @@
    (sab/html
     (when emailhash
       [:img.avatar
-       {:src (str "img/aprilfools/" (name (fools/animal-team user)) ".jpg")
+       {:src   (let [team (fools/animal-team user)
+                     leader (first (fools/high-score team))]
+                 (if (= leader username)
+                   (str "img/aprilfools/" (name team) "-leader.gif")
+                  (str "img/aprilfools/" (name team) ".jpg")))
         :style {:width (str (:size opts) "px")
                 :height (str (:size opts) "px")}
         :alt username}]))))
