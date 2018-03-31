@@ -532,7 +532,6 @@
       (card-subroutine state :corp (refresh jua) 0)
       (prompt-select :corp (get-program state 0))
       (prompt-select :corp (get-hardware state 0))
-      (prn (:prompt (get-runner)))
       (prompt-card :runner (get-program state 0))
       (is (nil? (get-program state 0)) "Card is uninstalled")
       (is (= 1 (count (:deck (get-runner)))) "Runner puts card in deck"))))
@@ -1110,6 +1109,7 @@
     (play-from-hand state :corp "Wraparound" "HQ")
     (let [wrap (get-ice state :hq 0)]
       (core/rez state :corp wrap)
+      (prn (refresh wrap))
       (is (= 7 (:current-strength (refresh wrap)))
           "Wraparound +7 strength with no fracter in play")
       (take-credits state :corp)
