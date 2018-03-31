@@ -91,6 +91,8 @@
 
 (defonce user-scores (atom {}))
 
+(defonce card-uses (atom {}))
+
 (defn team-cards [team]
   (get-in animal-teams [team :cards]))
 
@@ -150,14 +152,19 @@
   true) ;; TODO: REMOVE THIS
 
 (defn score-card-use [state side {title :title :as card}]
-  (let [user (get-in @state [side :user])
+  (let [{username :username :as user} (get-in @state [side :user])
         user-animal (animal-team user)
         card-animal (card-team title)
         existing-points (get-in @state [side :fools title] 0)]
-    (when (and (two-player-game? state) (< existing-points 10))
+    (when (and card-animal
+               (two-player-game? state)
+               (< existing-points 10))
       (increment-animal-score card-animal)
+      ;; Record one point for this card during this game.
       (swap! state update-in [side :fools title] (fnil inc 0))
       (when (= user-animal card-animal)
+        ;; Record card usage by this player
+        (swap! card-uses update-in [user-animal username] #(conj (or % #{}) title))
         (increment-user-score user-animal user)))))
 
 (defn score-misc [state side amount]
