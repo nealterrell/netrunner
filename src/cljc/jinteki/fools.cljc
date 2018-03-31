@@ -115,7 +115,8 @@
 (defn increment-animal-score
   "Takes a team name as a symbol, and increments that team's score by 1."
   ([team] (increment-animal-score team 1))
-  ([team amount] (swap! animal-scores update-in [team] (partial + amount))))
+  ([team amount] (when-not (nil? team)
+                   (swap! animal-scores update-in [team] (partial + amount)))))
 
 (defn increment-user-score
   "Increments the user's core for the given team"
