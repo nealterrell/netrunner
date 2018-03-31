@@ -16,7 +16,7 @@
                                            "Chimera" "Quandary" "Conundrum"}
                               :card-icon "🐱"
                               :nickname  "kitty meow"
-                              :leader    "Something something"
+                              :leader    "Pakhet"
                               :sounds    {:trash #{"cat-trash1"}
                                           :play #{"cat-play1"}
                                           :use #{"cat-use1" "cat-use2"}}}
@@ -68,11 +68,11 @@
                                           :use   #{"bird-use1" "bird-use2" "bird-use3" "bird-use4"}
                                           :trash #{"bird-trash1" "bird-trash2"}}}
                    :whale    {:name      "Team Whale"
-                              :cards     #{"Howler" "Darwin" "Swordsman" "Red Herrings" "Spear Phishing" "Leviathan"
+                              :cards     #{"Howler" "Darwin" "Swordsman" "Red Herrings" "Spear Phishing" "Leviathan" "Chum"
                                            }
                               :card-icon "🐳"
                               :nickname  "baby beluga"
-                              :leader    ""
+                              :leader    "Call Me Ishmael"
                               :sounds    {:trash #{"whale-trash"}
                                           :play  #{"whale-play1" "whale-play2"}}}})
 
