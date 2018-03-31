@@ -15,8 +15,9 @@
 (defn leaderboard-view [leaderboard owner]
   (reify
     om/IInitState
-    (init-state [this] {:team-leaders @fools/user-scores
-                        :team-stats @fools/animal-scores})
+    (init-state [this] (let [stats (fools/socket-data)]
+                         {:team-leaders (:leaders stats)
+                          :team-stats (:teams stats)}))
 
     om/IWillMount
     (will-mount [this]
@@ -54,21 +55,16 @@
          [:h3 "Pack Leaders"]
          (let [leaders (om/get-state owner :team-leaders)]
            (for [[team {leader :leader nick :nickname}] (sort-by #(:name (second %)) fools/animal-teams)]
-             (let [high-score (->> (get leaders team)
-                                (sort-by second)
-                                reverse
-                                first)
+             (let [high-score (get leaders team)
                    high-name (first high-score)
                    score (second high-score)]
-               [:div.team-leader
-                [:div.avatar (om/build avatar {:username high-name :emailhash "fake"} {:opts {:size 48}})]
-                [:div.username high-name]
-                [:div leader]
-                [:div score " " nick " points"]])
-             ))
-         [:div {:style {:clear "both"}} " "]
-         ]
-        ))))
+               (when score
+                 [:div.team-leader
+                  [:div.avatar (om/build avatar {:username high-name :emailhash "fake"} {:opts {:size 48}})]
+                  [:div.username high-name]
+                  [:div leader]
+                  [:div score " " nick " points"]]))))
+         [:div {:style {:clear "both"}} " "]]))))
 
 (defn leaderboard [{:keys [user]} owner]
   (om/component
