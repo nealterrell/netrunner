@@ -56,7 +56,7 @@
                                           :use   #{"ungulate-use1"}}}
                    :bee      {:name      "Team Bee"
                               :cards     #{"Plan B" "Honeyfarm" "Chrysalis" "Hive" "Hivemind" "Swarm" "Mutate" "Interrupt 0" "Special Report"
-                                           "Bug"}
+                                           "Bug" "Armored Servers"}
                               :card-icon "🐝"
                               :nickname  "buzz buzz"
                               :leader    "Bee the Change You Want to See In the World"
