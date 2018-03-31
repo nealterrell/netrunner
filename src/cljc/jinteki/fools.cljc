@@ -33,7 +33,7 @@
                               :nickname  "dinorawr"
                               :leader    "GOJIRA!!!!"
                               :sounds    {:play #{"lizard-play1" "lizard-play2" "lizard-play3" "lizard-play4" "lizard-play5"}
-                                          :use #{"lizard-use1" "lizard-use2" "lizard-use3" "lizard-use4" "lizard-use5"}}
+                                          :use #{"lizard-use1" "lizard-use2" "lizard-use3" "lizard-use4" "lizard-use5"}}}
                    :turtle   {:name      "Team Turtle"
                               :cards     #{"Aumakua" "Turtlebacks" "Shell Corporation" "Bullfrog" "Gbahali"}
                               :card-icon "🐢"
@@ -51,7 +51,7 @@
                               :sounds    {}}
                    :bee      {:name      "Team Bee"
                               :cards     #{"Plan B" "Honeyfarm" "Chrysalis" "Hive" "Hivemind" "Swarm" "Mutate" "Interrupt 0" "Special Report"
-                                           "Bug" "Chop Bot 3000"}
+                                           "Bug"}
                               :card-icon "🐝"
                               :nickname  "buzz buzz"
                               :leader    "Bee the Change You Want to See In the World"

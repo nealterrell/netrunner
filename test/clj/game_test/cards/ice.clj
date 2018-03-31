@@ -1109,7 +1109,6 @@
     (play-from-hand state :corp "Wraparound" "HQ")
     (let [wrap (get-ice state :hq 0)]
       (core/rez state :corp wrap)
-      (prn (refresh wrap))
       (is (= 7 (:current-strength (refresh wrap)))
           "Wraparound +7 strength with no fracter in play")
       (take-credits state :corp)
