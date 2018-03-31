@@ -7,7 +7,10 @@
                                            "Grim"}
                               :card-icon "🐶"
                               :nickname  "bow-wow"
-                              :leader    "Good Boy"}
+                              :leader    "Good Boy"
+                              :sounds    {:play #{"dog-play1"}
+                                          :trash #{"dog-trash1"}
+                                          :use #{"dog-use1"}}}
                    :cat      {:name      "Team Cat"
                               :cards     #{"BlacKat" "Rumor Mill" "Marathon" "Hellion Alpha Test" "Hellion Beta Test" "Quantum Predictive Model"
                                            "Chimera" "Quandary" "Conundrum"}
@@ -16,7 +19,7 @@
                               :leader    "Something something"
                               :sounds    {:trash #{"cat-trash1"}
                                           :play #{"cat-play1"}
-                                          }}
+                                          :use #{"cat-use1" "cat-use2"}}}
                    :snake    {:name      "Team Snake"
                               :cards     #{"Susanoo-no-Mikoto" "Cobra" "Viper" "Mamba" "Caduceus" "Puffer" "Lamprey" "Wormhole" "Wraparound" "Tollbooth" "Uroboros" "Dracō" "Wyrm"}
                               :card-icon "🐍"
@@ -29,7 +32,8 @@
                               :card-icon "🦎"
                               :nickname  "dinorawr"
                               :leader    "GOJIRA!!!!"
-                              :sounds    {:play #{"lizard-play1"}}}
+                              :sounds    {:play #{"lizard-play1" "lizard-play2" "lizard-play3" "lizard-play4" "lizard-play5"}
+                                          :use #{"lizard-use1" "lizard-use2" "lizard-use3" "lizard-use4" "lizard-use5"}}
                    :turtle   {:name      "Team Turtle"
                               :cards     #{"Aumakua" "Turtlebacks" "Shell Corporation" "Bullfrog" "Gbahali"}
                               :card-icon "🐢"
@@ -50,7 +54,8 @@
                                            "Bug"}
                               :card-icon "🐝"
                               :nickname  "buzz buzz"
-                              :leader    "Bee the Change You Want to See In the World"}
+                              :leader    "Bee the Change You Want to See In the World"
+                              :sounds    {:use #{"bee-use1"}}}
                    :bird     {:name      "Team Bird"
                               :cards     #{"Owl" "Firmware Updates" "Kongamato" "Golden" "Peregrine" "Saker" "Recon Drone" "Origami"
                                            "GS Shrike M2" "Data Raven" "Peacock" "Egret"
@@ -58,12 +63,13 @@
                               :card-icon "🐦"
                               :nickname  "birb"
                               :leader    "Wingardium Leviosa"
-                              :sounds    {:play  #{"bird-play1" "bird-play2"}
-                                          :use   #{"bird-use1"}
+                              :sounds    {:play  #{"bird-play1" "bird-play2" "bird-play3" "bird-play4" "bird-play5" "bird-play6"
+                                                   "bird-play7" "bird-play8" "bird-play9" "bird-play10"}
+                                          :use   #{"bird-use1" "bird-use2" "bird-use3" "bird-use4"}
                                           :trash #{"bird-trash1" "bird-trash2"}}}
                    :whale    {:name      "Team Whale"
                               :cards     #{"Howler" "Darwin" "Swordsman" "Red Herrings" "Spear Phishing" "Leviathan"
-                                           "Crescentus" "Whirlpool" "Its a Trap!"}
+                                           }
                               :card-icon "🐳"
                               :nickname  "baby beluga"
                               :leader    ""
