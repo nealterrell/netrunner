@@ -47,7 +47,7 @@
                               :sounds    {}}
                    :bee      {:name      "Team Bee"
                               :cards     #{"Plan B" "Honeyfarm" "Chrysalis" "Hive" "Hivemind" "Swarm" "Mutate" "Interrupt 0" "Special Report"
-                                           "Bug"}
+                                           "Bug" "Chop Bot 3000"}
                               :card-icon "🐝"
                               :nickname  "buzz buzz"
                               :leader    "Bee the Change You Want to See In the World"}
