@@ -16,7 +16,7 @@
                                            "Chimera" "Quandary" "Conundrum"}
                               :card-icon "🐱"
                               :nickname  "kitty meow"
-                              :leader    "Something something"
+                              :leader    "Mr. Bigglesworth"
                               :sounds    {:trash #{"cat-trash1" "cat-trash2"}
                                           :play  #{"cat-play1"}
                                           :use   #{"cat-use1" "cat-use2"}}}
