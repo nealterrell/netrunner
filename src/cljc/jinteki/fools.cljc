@@ -23,9 +23,9 @@
                               :nickname  "snek"
                               :leader    "Cobra Commander"
                               :sounds    {:play #{"snake-play1"}}}
-                   :lizard   {:name      "Team Lizard"
-                              :cards     #{"Financial Collapse" "Shattered Remains" "Casting Call" "Chameleon" "Exploratory Romp" "Modded"
-                                           "Maw" "Dinosaurus"}
+                   :lizard   {:name     "Team Lizard"
+                              :cards    #{"Financial Collapse" "Shattered Remains" "Casting Call" "Chameleon" "Exploratory Romp" "Modded"
+                                          "Maw" "Dinosaurus" "Gbahali"}
                               :card-icon "🦎"
                               :nickname  "dinorawr"
                               :leader    "GOJIRA!!!!"
@@ -53,7 +53,8 @@
                               :leader    "Bee the Change You Want to See In the World"}
                    :bird     {:name      "Team Bird"
                               :cards     #{"Owl" "Firmware Updates" "Kongamato" "Golden" "Peregrine" "Saker" "Recon Drone" "Origami"
-                                           "GS Shrike M2" "Data Raven" "Peacock" "Egret"}
+                                           "GS Shrike M2" "Data Raven" "Peacock" "Egret"
+                                           "Thoth" "Hadrian's Wall" "Early Bird" "Paricia" "The Gauntlet"}
                               :card-icon "🐦"
                               :nickname  "birb"
                               :leader    "Wingardium Leviosa"
@@ -61,7 +62,8 @@
                                           :use   #{"bird-use1"}
                                           :trash #{"bird-trash1" "bird-trash2"}}}
                    :whale    {:name      "Team Whale"
-                              :cards     #{"Howler" "Darwin" "Swordsman" "Red Herrings" "Spear Phishing" "Leviathan"}
+                              :cards     #{"Howler" "Darwin" "Swordsman" "Red Herrings" "Spear Phishing" "Leviathan"
+                                           "Crescentus" "Whirlpool" "Its a Trap!"}
                               :card-icon "🐳"
                               :nickname  "baby beluga"
                               :leader    ""
