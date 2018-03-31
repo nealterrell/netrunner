@@ -17,12 +17,12 @@
                               :sounds   {:play  #{"snake-play1"}}}
                    :lizard   {:name     "Team Lizard"
                               :cards    #{"Financial Collapse" "Shattered Remains" "Casting Call" "Chameleon" "Exploratory Romp" "Modded"
-                                          "Maw" "Dinosaurus" "Gbahali"}
+                                          "Maw" "Dinosaurus"}
                               :card-icon "🦎"
                               :nickname "dinorawr"
                               :sounds   {:play  #{"lizard-play1"}}}
                    :turtle   {:name     "Team Turtle"
-                              :cards    #{"Aumakua" "Turtlebacks" "Shell Corporation" "Bullfrog" "Surfer"}
+                              :cards    #{"Aumakua" "Turtlebacks" "Shell Corporation" "Bullfrog" "Surfer" "Gbahali"}
                               :card-icon "🐢"
                               :nickname "cowabunga"
                               :sounds   {:play #{"turtle-play1"}
