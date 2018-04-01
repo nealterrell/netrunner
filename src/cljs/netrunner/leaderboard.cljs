@@ -71,7 +71,7 @@
                          :style
                                 {:width (str (+ 10 (* 100 (/ score maxscore))) "%")}}
                         [:span.score score]]))))
-
+           
            [:h3 "Pack Leaders"]
            (let [leaders (om/get-state owner :team-leaders)]
              (for [[team {leader :leader nick :nickname}] (sort-by #(:name (second %)) fools/animal-teams)]
@@ -81,8 +81,8 @@
                  (when score
                    [:div.team-leader
                     [:div.avatar (om/build avatar {:username high-name :emailhash "fake"} {:opts {:size 48}})]
-                    [:div.username high-name]
-                    [:div leader]
+                    [:div.teamname (fools/team-name team) " " (fools/team-card-icon team) (fools/team-card-icon team) (fools/team-card-icon team)]
+                    [:div.username high-name " [" (fools/team-leader team) "]"]
                     [:div score " " nick " points"]]))))
            [:div {:style {:clear "both"}} " "]])))))
 
