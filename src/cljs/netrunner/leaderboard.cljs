@@ -69,7 +69,7 @@
                        [:div.bar
                         {:class shortname
                          :style
-                                {:width (str (+ 10 (* 100 (/ score maxscore))) "%")}}
+                                {:width (str (max 10 (* 100 (/ score maxscore))) "%")}}
                         [:span.score score]]))))
            
            [:h3 "Pack Leaders"]
