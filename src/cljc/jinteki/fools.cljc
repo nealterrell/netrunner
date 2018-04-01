@@ -113,6 +113,7 @@
            (first %))
         animal-teams))
 
+
 (defn parse-name [s]
   #?(:clj  (reduce + (map int s))
      :cljs (reduce + (map #(.charCodeAt % 0) s))))
@@ -142,6 +143,11 @@
   ([team {:keys [username] :as user} amount]
    (swap! user-scores update-in [team username] (fnil inc 0))))
 
+
+(defn score-for-user [{username :username :as user}]
+  (let [team (animal-team user)]
+    (get-in @user-scores [team username] 0)))
+
 (defn get-score
   "Takes a team name as a symbol, and returns that team's score."
   [team]
@@ -165,13 +171,16 @@
       (when (= user-animal card-animal)
         ;; Record card usage by this player
         (swap! card-uses update-in [user-animal username] #(conj (or % #{}) title))
-        (increment-user-score user-animal user)))))
+        (increment-user-score user-animal user)
+        (swap! state assoc-in [side :fools :total] (score-for-user user))))))
 
 (defn score-misc [state side amount]
   (let [user (get-in @state [side :user])
         user-animal (animal-team user)]
     (when (two-player-game? state)
-      (increment-user-score user-animal user amount))))
+
+      (increment-user-score user-animal user amount)
+      (swap! state assoc-in [side :fools :total] (or (score-for-user user) 0)))))
 
 (defn high-score [team]
   (first (get @user-scores team)))
