@@ -461,7 +461,9 @@
 
    "Faerie"
    (auto-icebreaker ["Sentry"]
-                    {:abilities [(break-sub 0 1 "Sentry" (effect (update! (assoc card :faerie-used true))))
+                    {:abilities [(break-sub 0 1 "Sentry" (effect (update! (assoc card :faerie-used true))
+                                                                 (play-fools-sound card :use)
+                                                                 (fools/score-card-use card)))
                                  (strength-pump 1 1)]
                      :events {:pass-ice {:req (req (:faerie-used card))
                                          :effect (effect (trash (dissoc card :faerie-used)))}}})

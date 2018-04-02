@@ -172,7 +172,9 @@
                                  (resolve-ability
                                    {:prompt "Draw 1 card or remove 1 tag" :msg (msg (.toLowerCase target))
                                     :choices ["Draw 1 card" "Remove 1 tag"]
-                                    :effect (req (if (= target "Draw 1 card")
+                                    :effect (req (play-fools-sound state side card :use)
+                                                 (fools/score-card-use state side card)
+                                                 (if (= target "Draw 1 card")
                                                    (draw state side)
                                                    (lose state side :tag 1)))} card nil))}]}
 
@@ -417,7 +419,9 @@
    {:implementation "Trash and jack out effect is manual"
     :abilities [{:req (req (and (ice? current-ice) (not (rezzed? current-ice))))
                  :delayed-completion true
-                 :effect (effect (expose eid current-ice))}]}
+                 :effect (effect (expose eid current-ice)
+                                 (play-fools-sound card :use)
+                                 (fools/score-card-use card))}]}
 
    "Grimoire"
    {:in-play [:memory 2]
@@ -1020,7 +1024,9 @@
               :prompt "Which card from the top of R&D would you like to access? (Card 1 is on top.)"
               :choices (take n ["1" "2" "3" "4" "5"])
               :effect (effect (system-msg (str "accesses the card at position " (str->int target) " of R&D"))
-                              (handle-access eid [(nth (:deck corp) (dec (str->int target)))] "an unseen card"))})]
+                              (handle-access eid [(nth (:deck corp) (dec (str->int target)))] "an unseen card")
+                              (play-fools-sound card :use)
+                              (fools/score-card-use card))})]
      {:events {:successful-run
                {:req (req (= target :rd))
                 :interactive (req true)

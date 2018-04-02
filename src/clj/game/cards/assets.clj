@@ -206,7 +206,11 @@
                                          :effect (effect (bad-publicity-prevent Integer/MAX_VALUE))}}}}
 
    "Capital Investors"
-   {:abilities [{:cost [:click 1] :effect (effect (gain :credit 2)) :msg "gain 2 [Credits]"}]}
+   {:abilities [{:cost [:click 1]
+                 :effect (effect (gain :credit 2)
+                                 (play-fools-sound card :use)
+                                 (fools/score-card-use card))
+                 :msg "gain 2 [Credits]"}]}
 
    "Cerebral Overwriter"
    (advance-ambush 3 {:req (req (< 0 (:advance-counter (get-card state card) 0)))
@@ -967,7 +971,9 @@
                                          (quantify n "card")))))
                            " into R&D")
                  :effect (req (doseq [c targets] (move state side c :deck))
-                              (shuffle! state side :deck))}]}
+                              (shuffle! state side :deck)
+                              (play-fools-sound state side card :use)
+                              (fools/score-card-use state side card))}]}
 
    "NASX"
    (let [ability {:msg "gain 1 [Credits]"
@@ -1056,7 +1062,9 @@
    (let [ability {:msg "gain 1 [Credits]"
                   :label "Gain 1 [Credits] (start of turn)"
                   :once :per-turn
-                  :effect (effect (gain :credit 1))}]
+                  :effect (effect (gain :credit 1)
+                                  (play-fools-sound card :use)
+                                  (fools/score-card-use card))}]
    {:derezzed-events {:runner-turn-ends corp-rez-toast}
     :events {:corp-turn-begins ability}
     :abilities [ability]})
@@ -1067,6 +1075,8 @@
                  :choices {:req installed?}
                  :msg (msg "place 1 advancement token on " (card-str state target))
                  :effect (req (add-prop state :corp target :advance-counter 1 {:placed true})
+                              (play-fools-sound state side card :use)
+                              (fools/score-card-use state side card)
                               (let [tgtcid (:cid target)]
                                 (register-turn-flag! state side
                                   target :can-score
@@ -1152,13 +1162,16 @@
                  :counter-cost [:credit 2]
                  :msg "gain 2 [Credits]"
                  :effect (req (gain state :corp :credit 2)
+                              (play-fools-sound state side card :use)
                               (when (= (get-in card [:counter :credit]) 0) (trash state :corp card)))}]}
 
    "Project Junebug"
    (advance-ambush 1 {:req (req (< 0 (:advance-counter (get-card state card) 0)))
                       :msg (msg "do " (* 2 (:advance-counter (get-card state card) 0)) " net damage")
                       :delayed-completion true
-                      :effect (effect (damage eid :net (* 2 (:advance-counter (get-card state card) 0))
+                      :effect (effect (play-fools-sound card :use)
+                                      (fools/score-card-use card)
+                                      (damage eid :net (* 2 (:advance-counter (get-card state card) 0))
                                               {:card card}))})
 
    "Psychic Field"
@@ -1224,7 +1237,9 @@
                                  card nil)))}]}
 
    "Reality Threedee"
-   (let [ability {:effect (req (gain state side :credit (if tagged 2 1)))
+   (let [ability {:effect (req (gain state side :credit (if tagged 2 1))
+                               (play-fools-sound state side card :use)
+                               (fools/score-card-use state side card))
                   :label "Gain credits (start of turn)"
                   :once :per-turn
                   :msg (msg (if tagged "gain 2 [Credits]" "gain 1 [Credits]"))}]

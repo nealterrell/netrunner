@@ -1657,7 +1657,9 @@
       :events {:pump-breaker {:silent (req true)
                               :req (req (not (get-in @state [:per-turn (:cid card)])))
                               :effect (effect (update! (update-in (second targets) [:pump :all-run] (fnil #(+ % (first targets)) 0)))
-                                              (update-breaker-strength (second targets)))}
+                                              (update-breaker-strength (second targets))
+                                              (play-fools-sound card :use)
+                                              (fools/score-card-use card))}
                :pass-ice ss :run-ends ss}
       :move-zone (req (when (= [:discard] (:zone card))
                         (unregister-events state side card)))})

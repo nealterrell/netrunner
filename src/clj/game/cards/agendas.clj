@@ -942,6 +942,7 @@
    {:steal-req (req (not tagged))
     :access {:req (req tagged)
              :effect (effect (as-agenda card 1)
+                             (fools/score-card-use card)
                              (play-fools-sound card :install))
              :msg "add it to their score area and gain 1 agenda point"}}
 

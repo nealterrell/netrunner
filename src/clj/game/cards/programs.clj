@@ -398,7 +398,9 @@
                                 {:prompt "Choose a card to trash"
                                  :choices (req (filter #(= (:side %) "Corp") (:hand corp)))
                                  :effect (effect (trash target)
-                                                 (clear-wait-prompt :runner))}
+                                                 (clear-wait-prompt :runner)
+                                                 (play-fools-sound card :use)
+                                                 (fools/score-card-use card))}
                                card nil))}]}
 
    "Hivemind"
@@ -439,7 +441,9 @@
     :abilities [{:counter-cost [:virus 1]
                  :msg "trash at no cost"
                  :once :per-turn
-                 :effect (effect (trash-no-cost))}]}
+                 :effect (effect (trash-no-cost)
+                                 (play-fools-sound card :use)
+                                 (fools/score-card-use card))}]}
 
    "Incubator"
    {:events {:runner-turn-begins {:effect (effect (add-counter card :virus 1))}}
@@ -452,7 +456,9 @@
 
    "Ixodidae"
    {:events {:corp-loss {:req (req (= (first target) :credit)) :msg "gain 1 [Credits]"
-                         :effect (effect (gain :runner :credit 1))}
+                         :effect (effect (gain :runner :credit 1)
+                                         (play-fools-sound card :use)
+                                         (fools/score-card-use card))}
              :purge {:effect (effect (trash card))}}}
 
    "Keyhole"
@@ -488,6 +494,9 @@
                                     :msg (msg "host " (:title target))
                                     :effect (effect (gain :memory (:memoryunits target))
                                                     (runner-install target {:host-card card})
+                                                    (play-fools-sound card :use)
+                                                    (fools/score-card-use card)
+
                                                     (update! (assoc (get-card state card)
                                                                     :hosted-programs
                                                                     (cons (:cid target) (:hosted-programs card)))))}
@@ -500,6 +509,8 @@
                  :msg (msg "host " (:title target))
                  :effect (effect (host card target)
                                  (gain :memory (:memoryunits target))
+                                 (play-fools-sound card :use)
+                                 (fools/score-card-use card)
                                  (update! (assoc (get-card state card)
                                                  :hosted-programs (cons (:cid target) (:hosted-programs card)))))}]
     :events {:card-moved {:req (req (some #{(:cid target)} (:hosted-programs card)))
@@ -594,6 +605,8 @@
 
    "Panchatantra"
    {:abilities [{:msg "add a custom subtype to currently encountered ICE"
+                 :effect (effect (play-fools-sound card :use)
+                                 (fools/score-card-use card))
                  :once :per-turn}]}
 
    "Parasite"
@@ -898,7 +911,9 @@
                   :msg (msg "gain " (quot (:credit corp) 5) " [Credits]")
                   :once :per-turn
                   :req (req (:runner-phase-12 @state))
-                  :effect (effect (gain :credit (quot (:credit corp) 5)))}]
+                  :effect (effect (gain :credit (quot (:credit corp) 5))
+                                  (play-fools-sound card :use)
+                                  (fools/score-card-use card))}]
      {:req (req (some #{:hq :rd :archives} (:successful-run runner-reg)))
       :flags {:drip-economy true}
       :abilities [ability]

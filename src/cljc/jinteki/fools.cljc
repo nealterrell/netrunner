@@ -3,7 +3,9 @@
 (def animal-teams {:dog      {:name      "Team Dog"
                               ;; First row of cards is corp, second is runner
                               :cards     #{"Lycan" "Synth DNA Modification" "Rover Algorithm" "Watchdog" "Lab Dog" "Pup" "Komainu" "News Hound"  "Data Hound" "Grim"
-                                           "Cerberus \"Lady\" H1" "Cerberus \"Rex\" H2" "Cerberus \"Cuj.0\" H3" "Emergency Shutdown" "HQ Interface"}
+                                           "Museum of History" "Fenris"
+                                           "Cerberus \"Lady\" H1" "Cerberus \"Rex\" H2" "Cerberus \"Cuj.0\" H3" "Emergency Shutdown" "HQ Interface"
+                                           "ZU.13 Key Master" "Corporate Defector"}
                               :card-icon "🐶"
                               :nickname  "bow-wow"
                               :leader    "Good Boy"
@@ -11,8 +13,10 @@
                                           :trash #{"dog-trash1"}
                                           :use   #{"dog-use1"}}}
                    :cat      {:name      "Team Cat"
-                              :cards     #{"Hellion Alpha Test" "Hellion Beta Test" "Quantum Predictive Model" "Chimera" "Quandary" "Conundrum"
-                                           "BlacKat" "Rumor Mill" "Marathon" }
+                              :cards     #{"Hellion Alpha Test" "Hellion Beta Test" "Quantum Predictive Model" "Chimera" "Quandary" "Enigma" "Conundrum"
+                                           "Reality Threedee"
+                                           "BlacKat" "Rumor Mill" "Marathon" "Mongoose" "Rabbit Hole" "Panchatantra" "Top Hat" "Armitage Codebusting"
+                                           "System Seizure" "Kabonesa Wu: Netspace Thrillseeker" "Inversificator" "Self-modifying Code"}
                               :card-icon "🐱"
                               :nickname  "kitty meow"
                               :leader    "Mr. Bigglesworth"
@@ -21,7 +25,8 @@
                                           :use   #{"cat-use1" "cat-use2"}}}
                    :snake    {:name      "Team Snake"
                               :cards     #{"Susanoo-no-Mikoto" "Cobra" "Viper" "Mamba" "Caduceus" "Wormhole" "Wraparound" "Tollbooth" "Uroboros" "Dracō"
-                                           "Puffer"  "Wyrm" "Lamprey"}
+                                           "Private Contracts"
+                                           "Puffer"  "Wyrm" "Lamprey" "Tapwrm" "Hemorrhage" "Aurora" "Surge"}
                               :card-icon "🐍"
                               :nickname  "snek"
                               :leader    "Cobra Commander"
@@ -30,7 +35,7 @@
                                           :use   #{"snake-sure1"}}}
                    :lizard   {:name      "Team Lizard"
                               :cards     #{"Financial Collapse" "Shattered Remains" "Casting Call"
-                                           "Chameleon" "Exploratory Romp" "Modded" "Maw" "Dinosaurus"}
+                                           "Chameleon" "Exploratory Romp" "Modded" "Maw" "Dinosaurus" "Power Nap"}
                               :card-icon "🦎"
                               :nickname  "dinorawr"
                               :leader    "GOJIRA!!!!"
@@ -38,7 +43,7 @@
                                           :use   #{"lizard-use1" "lizard-use2" "lizard-use3"}
                                           :trash #{"lizard-trash1"}}}
                    :turtle   {:name      "Team Turtle"
-                              :cards     #{"Turtlebacks" "Shell Corporation" "Bullfrog"
+                              :cards     #{"Turtlebacks" "Shell Corporation" "Bullfrog" "Bulwark"
                                            "Aumakua" "Gbahali"}
                               :card-icon "🐢"
                               :nickname  "cowabunga"
@@ -48,7 +53,8 @@
                                           :trash #{"turtle-trash1" "turtle-trash2"}}}
                    :ungulate {:name      "Team Ungulate"
                               :cards     #{"Celebrity Gift" "Trojan Horse" "Green Level Clearance" "Improved Tracers" "Taurus"  "Sagittarius"
-                                           "Patron" "On the Lam" "Battering Ram" "Wari" "Knight"}
+                                           "PAD Campaign"
+                                           "Patron" "On the Lam" "Battering Ram" "Wari" "Knight" "Leprechaun" "Imp"}
                               :card-icon "🐮"
                               :nickname  "whinnie"
                               :leader    "Li'l Sebastian"
@@ -57,7 +63,10 @@
                                           :use   #{"ungulate-use1"}}}
                    :bee      {:name      "Team Bee"
                               :cards     #{"Plan B" "Honeyfarm" "Chrysalis" "Hive" "Swarm" "Mutate" "Interrupt 0" "Special Report"  "Armored Servers"
-                                           "Hivemind" "Bug"}
+                                           "Burke Bugs" "Anansi" "Spiderweb" "Improved Protein Source" "Project Junebug" "PAD Factory"
+                                           "Trick of Light" "Paywall Implementation" "Philotic Entanglement" "Superior Cyberwalls"
+                                           "Hivemind" "Bug" "Na'Not'K" "Chop Bot 3000" "Bug Out Bag" "Ixodidae" "Faerie" "Cyber-Cypher"
+                                           "Femme Fatale" "Creeper" "GPI Net Tap"}
                               :card-icon "🐝"
                               :nickname  "buzz buzz"
                               :leader    "Bee the Change You Want to See In the World"
@@ -65,8 +74,10 @@
                                           :play  #{"bee-play1" "bee-play2"}
                                           :trash #{"bee-trash1"}}}
                    :bird     {:name      "Team Bird"
-                              :cards     #{"Owl" "Firmware Updates" "Data Raven" "Thoth" "Hadrian's Wall"
-                                           "Kongamato" "Golden" "Peregrine" "Saker" "Recon Drone" "Origami" "GS Shrike M2" "Peacock" "Egret" "Early Bird" "Paricia" "The Gauntlet"}
+                              :cards     #{"Owl" "Firmware Updates" "Data Raven" "Thoth" "Hadrian's Wall" "Lateral Growth"
+                                           "Ultraviolet Clearance" "Explode-a-palooza"
+                                           "Kongamato" "Golden" "Peregrine" "Saker" "Recon Drone" "Origami" "GS Shrike M2" "Peacock" "Egret" "Early Bird"
+                                           "Paricia" "The Gauntlet" "Khan: Savvy Skiptracer" "Quetzal: Free Spirit"}
                               :card-icon "🐦"
                               :nickname  "birb"
                               :leader    "Wingardium Leviosa"
@@ -75,8 +86,8 @@
                                           :use   #{"bird-use1" "bird-use2" "bird-use3" "bird-use4" "bird-use5"}
                                           :trash #{"bird-trash1" "bird-trash2"}}}
                    :whale    {:name      "Team Whale"
-                              :cards     #{"Howler" "Swordsman" "Red Herrings"
-                                           "Darwin" "Spear Phishing" "Leviathan"}
+                              :cards     #{"Howler" "Swordsman" "Red Herrings" "Whirlpool" "Capital Investors"
+                                           "Darwin" "Spear Phishing" "Leviathan" "Apex: Invasive Predator" "Enhanced Vision"}
                               :card-icon "🐳"
                               :nickname  "baby beluga"
                               :leader    "Call Me Ishmael"
@@ -154,8 +165,7 @@
   (@animal-scores team))
 
 (defn two-player-game? [state]
-  (and (-> @state :corp :user :username) (-> @state :runner :user :username))
-  true) ;; TODO: REMOVE THIS
+  (and (-> @state :corp :user :username) (-> @state :runner :user :username)))
 
 (defn score-card-use [state side {title :title :as card}]
   (let [{username :username :as user} (get-in @state [side :user])
@@ -165,10 +175,10 @@
     (when (and card-animal
                (two-player-game? state)
                (< existing-points 10))
-      (increment-animal-score card-animal)
-      ;; Record one point for this card during this game.
-      (swap! state update-in [side :fools title] (fnil inc 0))
       (when (= user-animal card-animal)
+        (increment-animal-score card-animal)
+        ;; Record one point for this card during this game.
+        (swap! state update-in [side :fools title] (fnil inc 0))
         ;; Record card usage by this player
         (swap! card-uses update-in [user-animal username] #(conj (or % #{}) title))
         (increment-user-score user-animal user)

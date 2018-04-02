@@ -134,7 +134,9 @@
                                        (in-hand? %))}
                   :req (req (and (pos? (count (:hand runner)))
                                  (:runner-phase-12 @state)))
-                  :effect (effect (runner-install target {:facedown true}))}]
+                  :effect (effect (runner-install target {:facedown true})
+                                  (play-fools-sound card :use)
+                                  (fools/score-card-use card))}]
      {:events {:runner-turn-begins ability}
       :flags {:runner-phase-12 (req (pos? (count (:hand runner))))}
       :abilities [ability]})
@@ -579,7 +581,9 @@
                  :effect (effect (trigger-event :searched-stack nil)
                                  (shuffle! :deck)
                                  (install-cost-bonus [:credit -1])
-                                 (runner-install (assoc-in target [:special :kabonesa] true)))
+                                 (runner-install (assoc-in target [:special :kabonesa] true))
+                                 (play-fools-sound card :use)
+                                 (fools/score-card-use card))
                  :end-turn
                  {:req (req (get-in (find-cid (:cid target) (all-active-installed state :runner)) [:special :kabonesa]))
                   :msg (msg "remove " (:title target) " from the game")
@@ -616,7 +620,9 @@
                                                 :delayed-completion true
                                                 :msg (msg "install " (:title target))
                                                 :effect (effect (install-cost-bonus [:credit -1])
-                                                                (runner-install eid target nil))}
+                                                                (runner-install eid target nil)
+                                                                (play-fools-sound card :use)
+                                                                (fools/score-card-use card))}
                                                card nil)
                              (effect-completed state side eid)))}}}
 
@@ -810,7 +816,9 @@
                            :effect (effect (gain :corp :credit 1))}}}
 
    "Quetzal: Free Spirit"
-   {:abilities [{:once :per-turn :msg "break 1 Barrier subroutine"}]}
+   {:abilities [{:once :per-turn :msg "break 1 Barrier subroutine"
+                 :effect (effect (play-fools-sound card :use)
+                                 (fools/score-card-use card))}]}
 
    "Reina Roja: Freedom Fighter"
    {:events {:pre-rez {:req (req (and (ice? target) (not (get-in @state [:per-turn (:cid card)]))))

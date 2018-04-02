@@ -881,7 +881,9 @@
                                 :effect (effect (ice-strength-bonus 2 target))}}}
 
    "Paywall Implementation"
-   {:events {:successful-run {:msg "gain 1 [Credits]" :effect (effect (gain :corp :credit 1))}}}
+   {:events {:successful-run {:msg "gain 1 [Credits]" :effect (effect (gain :corp :credit 1)
+                                                                      (play-fools-sound card :use)
+                                                                      (fools/score-card-use card))}}}
 
    "Peak Efficiency"
    {:msg (msg "gain " (reduce (fn [c server]

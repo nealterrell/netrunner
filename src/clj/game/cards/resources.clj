@@ -126,6 +126,8 @@
                  :counter-cost [:credit 2]
                  :msg "gain 2 [Credits]"
                  :effect (req (gain state :runner :credit 2)
+                              (play-fools-sound state side card :use)
+                              (fools/score-card-use state side card)
                               (when (zero? (get-in card [:counter :credit] 0))
                                 (trash state :runner card {:unpreventable true})))}]}
 
@@ -295,6 +297,8 @@
     :events {:runner-turn-ends {:req (req (zero? (count (:hand runner))))
                                 :msg (msg "draw " (get-in card [:counter :power] 0) " cards. Bug Out Bag is trashed")
                                 :effect (effect (draw (get-in card [:counter :power] 0))
+                                                (play-fools-sound card :use)
+                                                (fools/score-card-use card)
                                                 (trash card))}}}
 
    "Caldera"
@@ -368,7 +372,9 @@
                    :effect (effect (gain :runner :credit 1))}}}
 
    "Corporate Defector"
-   {:events {:corp-click-draw {:msg (msg "reveal " (-> target first :title))}}}
+   {:events {:corp-click-draw {:msg (msg "reveal " (-> target first :title))
+                               :effect (effect (play-fools-sound card :use)
+                                               (fools/score-card-use card))}}}
 
    "Councilman"
    {:implementation "Does not restrict Runner to Asset / Upgrade just rezzed"
@@ -627,6 +633,8 @@
    "Enhanced Vision"
    {:events {:successful-run {:silent (req true)
                               :msg (msg "force the Corp to reveal " (:title (first (shuffle (:hand corp)))))
+                              :effect (effect (play-fools-sound card :use)
+                                              (fools/score-card-use card))
                               :req (req (genetics-trigger? state side :successful-run))}}}
 
    "Fall Guy"
