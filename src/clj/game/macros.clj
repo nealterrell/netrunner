@@ -15,9 +15,7 @@
                 'run-server '(when (:run @state)
                                (get-in @state (concat [:corp :servers] (:server (:run @state)))))
                 'run-ices '(:ices run-server)
-                'current-ice '(when-let [run-pos (:position (:run @state))]
-                                (when (and (pos? run-pos) (<= run-pos (count (:ices run-server))))
-                                  (nth (:ices run-server) (dec run-pos))))
+                'current-ice '(get-current-ice state)
                 'target '(first targets)]
            ~@actions))))
 
@@ -29,9 +27,7 @@
             'run-server '(when (:run @state)
                            (get-in @state (concat [:corp :servers] (:server (:run @state)))))
             'run-ices '(:ices run-server)
-            'current-ice '(when-let [run-pos (:position (:run @state))]
-                            (when (and (pos? run-pos) (<= run-pos (count (:ices run-server))))
-                              (nth (:ices run-server) (dec run-pos))))
+            'current-ice '(get-current-ice state)
             'corp-reg '(get-in @state [:corp :register])
             'corp-reg-last '(get-in @state [:corp :register-last-turn])
             'runner-reg '(get-in @state [:runner :register])
@@ -67,9 +63,7 @@
             'run-server '(when (:run @state)
                            (get-in @state (concat [:corp :servers] (:server (:run @state)))))
             'run-ices '(:ices run-server)
-            'current-ice '(when-let [run-pos (:position (:run @state))]
-                            (when (and (pos? run-pos) (<= run-pos (count (:ices run-server))))
-                              (nth (:ices run-server) (dec run-pos))))
+            'current-ice '(get-current-ice state)
             'target '(first targets)
             'tagged '(or (pos? (:tagged runner)) (pos? (:tag runner)))]
        (str ~@expr))))

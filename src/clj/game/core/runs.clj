@@ -4,16 +4,129 @@
          gain-run-credits update-ice-in-server update-all-ice
          get-agenda-points gain-agenda-point optional-ability
          get-remote-names card-name can-access-loud can-steal?
-         prevent-jack-out card-flag? can-run?)
+         prevent-jack-out card-flag? can-run? run-corp-rez-window jack-out successful-run)
+
+(defn get-current-ice
+  [state]
+  (let [run-pos (:position (:run @state) 0)
+        run-server (when run-pos
+                     (get-in @state (concat [:corp :servers] (:server (:run @state)))))]
+    (when (and (pos? run-pos) (<= run-pos (count (:ices run-server))))
+      (nth (:ices run-server) (dec run-pos)))))
 
 ;;; Steps in the run sequence
+
+(defn run-approach-server
+  "[5]: the runner approaches the attacked server"
+  [state side eid]
+  ;; [5.2]: the runner chooses whether to jack out or declare a successful run.
+  (continue-ability state side
+                    {:prompt "Complete a successful run, or jack out?"
+                     :choices ["Successful Run" "Jack Out"]
+                     :prompt-type :run
+                     :priority -1
+                     :delayed-completion true
+                     :effect (req (if (= "Jack Out" target)
+                                    (jack-out state side eid)
+                                    ;; TODO: successful-run is not eid compatible
+                                    (successful-run state side eid)))
+                     }
+                    nil nil)
+  )
+
+(defn run-pass-ice
+  "[4]: the runner passes a piece of ice."
+  [state side eid {:keys [title] :as ice} prompt-choice]
+  ;; [4]: "When passed" conditionals meet their trigger condition.
+  (when-completed (trigger-event-simult state side :pass-ice
+                                        {:cancel-fn (fn [state] (not= (:cid ice) (:cid (get-current-ice state))))})
+                  (cond
+                    ;; If there is another piece of ice protecting the server, go to [2].
+                    (= prompt-choice "Approach next ice")
+                    (run-corp-rez-window state side eid (get-current-ice state))
+
+                    ;; If there are no more pieces of ice protecting the server, go to [5].
+                    (= prompt-choice ("Approach server"))
+                    (run-approach-server state side eid)
+
+                    ;; 2.2: runner can jack out if this is not the first approached ice. (it is not.)
+                    (= prompt-choice "Jack out")
+                    (jack-out state side eid))))
+
+(defn run-encounter
+  "[3]: the runner encounters a piece of ice."
+  [state side eid {:keys [title] :as ice}]
+  ;; [3]: "When encountered" conditionals meet their trigger condition.
+  (when-completed (trigger-event-simult state side :encounter-ice
+                                        {:cancel-fn (fn [state] (not= (:cid ice) (:cid (get-current-ice state))))})
+                  (let [cur-ice (get-current-ice state)]
+                    ;; Make sure the runner did not bypass on encounter
+                    (if (and (= (:cid cur-ice) (:cid ice)))
+                      ;; See if the ice is rezzed or not
+                      (if (rezzed? cur-ice)
+                        ;; [3.1]: the runner can interact with the encountered ice.
+                        ;; [3.2]: resolve all subroutines not broken on the encountered ice. (Manual by corp.)
+                        (do (show-wait-prompt state :corp "Runner actions")
+                            (continue-ability state :runner
+                                              {:prompt (str "You encounter " title ". Interact with ice, paid abilities, etc.")
+                                               :choices [(str "Approach "
+                                                              (if (-> @state :run :position pos?)
+                                                                "next ice"
+                                                                "server"))
+                                                         "Jack out"]
+                                               :prompt-type :run
+                                               :priority -1
+                                               :delayed-completion true
+                                               ;; end-run will close this prompt. If the run does not end, then go to [4].
+                                               :effect (effect (run-pass-ice eid (get-current-ice state) target))}
+                                              nil nil)))))))
+
+(defn run-corp-rez-window
+  "[2.1] through [2.3]: runner is approaching a piece of ice."
+  [state side eid ice]
+  ;; [2]: the Runner approaches the next piece of ice. "When approached" conditionals meet their trigger condition.
+  (when-completed (trigger-event-simult state side :approach-ice
+                                        {:cancel-fn (fn [state] (not= (:cid ice) (:cid (get-current-ice state))))})
+                  (let [cur-ice (get-current-ice state)]
+                    ;; Make sure the runner did not bypass on approach
+                    (if (and (= (:cid cur-ice) (:cid ice)))
+                      ;; See if the ice is rezzed or not
+                      (if (rezzed? cur-ice)
+                        (run-encounter state side eid cur-ice)
+                        ;; [2.3]: Approached ice can be rezzed, paid abilities, non-ice can be rezzed.
+                        (do (show-wait-prompt state :runner "Corp to rez the approached ice")
+                            (when-completed (resolve-ability state :corp
+                                                             {:prompt      "Approach. Rez ice, non-ice. Paid abilities."
+                                                              :choices     ["No more actions"]
+                                                              :prompt-type :run
+                                                              :priority    -1
+                                                              :effect      (effect (clear-wait-prompt :runner))}
+                                                             nil nil)
+                                            ;; [2.4]: if the approached ice is rezzed, go to [3]. Else, go to [4].
+                                            (if (rezzed? (get-card state ice))
+                                              (run-encounter state side eid ice)
+                                              (run-pass-ice state side eid ice)))))))))
+
+(defn run-runner-first-ice
+  "Special case for [2], approaching first ice of a run."
+  [state side eid]
+  (when-completed (resolve-ability state :corp
+                                   {:prompt "You must approach the first ice protecting this server"
+                                    :choices ["Approach"]
+                                    :prompt-type :run
+                                    :priority -1
+                                    :delayed-completion true
+                                    :effect (req nil)}
+                                   nil nil)
+                  (run-corp-rez-window state side eid (get-current-ice state))))
+
 (defn run
   "Starts a run on the given server, with the given card as the cause."
   ([state side server] (run state side (make-eid state) server nil nil))
   ([state side eid server] (run state side eid server nil nil))
   ([state side server run-effect card] (run state side (make-eid state) server run-effect card))
   ([state side eid server run-effect card]
-   (when (can-run? state :runner)
+   (if (can-run? state :runner)
      (let [s [(if (keyword? server) server (last (server->zone state server)))]
            ices (get-in @state (concat [:corp :servers] s [:ices]))
            n (count ices)]
@@ -26,7 +139,8 @@
        (swap! state update-in [:runner :register :made-run] #(conj % (first s)))
        (update-all-ice state :corp)
        (trigger-event-sync state :runner (make-eid state) :run s)
-       (when (>= n 2) (trigger-event state :runner :run-big s n))))))
+       (when (>= n 2) (trigger-event state :runner :run-big s n)))
+     (effect-completed state side eid))))
 
 (defn gain-run-credits
   "Add temporary credits that will disappear when the run is over."
